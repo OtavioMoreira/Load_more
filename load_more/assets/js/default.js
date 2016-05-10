@@ -5,20 +5,24 @@ $(document).ready(function () {
     })
 
     $('.btn-load-more').click(function () {
-        var size_li = ($( this ).parent( "div").find('ul li').size());
-        var load = $( this ).parent( "div").find('ul').data("load");
-        var inicial = $( this ).parent( "div").find('ul').data("inicial");
-        var menuop = $( this ).parent( "div").find('ul').data("menu-load");
+        var $container = $( this ).parent( "div" );
+        var $ul = 'ul';
+        var $li = 'ul li';
+
+        var size_li = $container.find($li).size();
+        var load = $container.find($ul).data("load");
+        var inicial = $container.find($ul).data("inicial");
+        var menuop = $container.find($ul).data("menu-load");
 
         if(this['menu_'+menuop] == null){
             this['menu_'+menuop] = inicial;
         }
 
         this['menu_'+menuop] =+ (this['menu_'+menuop] + load <= size_li) ? this['menu_'+menuop] + load : size_li;
-        $($( this ).parent( "div").find('ul li:lt('+this['menu_'+menuop]+')')).slideDown();
+        $($container.find('ul li:lt('+this['menu_'+menuop]+')')).slideDown();
 
         if(size_li == this['menu_'+menuop]){
-            $( this ).parent( "div").find('.btn-load-more').hide();
+            $container.find('.btn-load-more').hide();
         }
     });
 });
